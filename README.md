@@ -1,4 +1,4 @@
-# Micronet
+# MicroNet
 
 > [!CAUTION]  
 > Currently in development!

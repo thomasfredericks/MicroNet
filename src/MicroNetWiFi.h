@@ -22,10 +22,7 @@ public:
 
 
 protected:
-  // GET FACTORY DEFINED ESP32 MAC :
-  virtual void getMac() {
-    esp_efuse_mac_get_default(mac);
-  }
+
   virtual void connect() {
 
 
@@ -66,7 +63,7 @@ public:
   }
 
 };
-NetworkManagerWiFi NetworkManager;
+
 #endif
 
 
