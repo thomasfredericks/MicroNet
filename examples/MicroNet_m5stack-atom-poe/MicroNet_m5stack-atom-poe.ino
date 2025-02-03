@@ -4,7 +4,12 @@
 // MicroOsc version 0.1.7 or higher https://github.com/thomasfredericks/MicroOsc
 // MicroLog https://github.com/thomasfredericks/MicroLog
 
-// This example requieres MicroOsc 
+// MICROSOFT WINDOWS mDNS tips
+// To find you computer's hostname, type in PowerShell : hostname 
+// To find the ip of a device, type in PowerShell and replace NAME with the name searched : Resolve-DnsName NAME
+
+
+// MicroOsc is used OSC communcation
 #include <MicroOscUdp.h>
 
 // MicroLog is used for logging
