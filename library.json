@@ -1,0 +1,19 @@
+{
+  "name": "MicroNet",
+  "version": "0.0.2",
+  "author": "Thomas O Fredericks",
+  "maintainer": "Thomas O Fredericks",
+  "description": "A network connection manager library for Arduino and PlatformIO. Helps manage the network (Ethernet or WiFi) connection and MDNS resolving.",
+  "keywords": ["network", "wifi", "ethernet", "mdns", "communication"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomasfredericks/MicroNet"
+  },
+  "frameworks": ["arduino"],
+  "platforms": ["espressif32"],
+  "headers": ["NetworkManager.h"],
+  "dependencies": [
+    { "name": "WifiManager" },
+    { "name": "EthernetBonjour" }
+  ]
+}
