@@ -1,5 +1,5 @@
 {
-  "name": "MicroNet",
+  "name": "NetworkManager",
   "version": "0.0.2",
   "author": "Thomas O Fredericks",
   "maintainer": "Thomas O Fredericks",
@@ -7,11 +7,15 @@
   "keywords": ["network", "wifi", "ethernet", "mdns", "communication"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/thomasfredericks/MicroNet"
+    "url": "https://github.com/thomasfredericks/NetworkManager"
   },
   "frameworks": ["arduino"],
   "platforms": ["espressif32"],
-  "headers": ["NetworkManager.h"],
+  "headers": [
+    "MicroNet.h",
+    "MicroNetEthernet.h",
+    "MicroNetWiFi.h"
+  ],
   "dependencies": [
     { "name": "WifiManager" },
     { "name": "EthernetBonjour" }
