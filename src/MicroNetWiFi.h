@@ -1,18 +1,18 @@
 #ifndef __NETWORK_MANAGER_WIFI__
 #define __NETWORK_MANAGER_WIFI__
 
-#include <NetworkManager.h>
+#include <MicroNet.h>
 #include <WiFi.h>
 #include <ESPmDNS.h>
 // https://github.com/tzapu/WiFiManager
 #include <WiFiManager.h>
 
 #ifdef ESP32
-class NetworkManagerWiFi : public NetworkManagerBase {
+class MicroNetWiFi : public MicroNetBase {
   WiFiManager wifiManager;
 
 public:
-  NetworkManagerWiFi() {
+  MicroNetWiFi() {
 #ifdef LOG_ACTIVATED
     wifiManager.setDebugOutput(true);
 #else
