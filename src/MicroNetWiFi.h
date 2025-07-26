@@ -26,7 +26,7 @@ protected:
   virtual void connect() {
 
 
-    LOG("NetworkManager", "Starting WiFi Manager with name", name);
+    LOG("NetworkManager", "Starting WiFi Manager with name", _name);
     WiFi.mode(WIFI_STA);  // explicitly set mode, esp defaults to STA+AP
 
     //reset settings - wipe credentials for testing
@@ -35,13 +35,13 @@ protected:
     wifiManager.setEnableConfigPortal(true);
     wifiManager.setConfigPortalBlocking(false);
     wifiManager.setCaptivePortalEnable(true);
-    bool isConnected = wifiManager.autoConnect(name);
+    bool isConnected = wifiManager.autoConnect(_name);
 
     while ( isConnected == false ) isConnected = wifiManager.process();
 
     LOG("NetworkManager", "Connected to network" );
-    LOG("NetworkManager", "Starting MDNS", name, "with IP", WiFi.localIP() );
-    MDNS.begin((const char*)name);
+    LOG("NetworkManager", "Starting MDNS", _name, "with IP", WiFi.localIP() );
+    MDNS.begin((const char*)_name);
 
   }
 public:
