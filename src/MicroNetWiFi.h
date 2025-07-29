@@ -51,6 +51,10 @@ public:
     return MDNS.queryHost(hostName);
   }
 
+   virtual IPAddress getIP() {
+    return WiFi.localIP();
+   }
+
   virtual void update() {
     wifiManager.process();
   }

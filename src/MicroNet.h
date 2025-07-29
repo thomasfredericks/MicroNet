@@ -30,7 +30,8 @@ public:
    // LOG("MicroNet", "mDNS Name:", _name);
     connect();
   }
-
+  
+  virtual IPAddress getIP() = 0;
   virtual IPAddress resolveName(const char *hostName) = 0;
   bool ipIsValid(IPAddress ip)
   {
