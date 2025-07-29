@@ -17,7 +17,13 @@
     "MicroNetWiFi.h"
   ],
   "dependencies": [
-    { "WiFiManager": "https://github.com/tzapu/WiFiManager#v2.0.17" },
-    { "EthernetBonjour": "https://github.com/TrippyLighting/EthernetBonjour" }
+    {
+      "name": "WiFiManager",
+      "url": "https://github.com/tzapu/WiFiManager#v2.0.17"
+    },
+    {
+      "name": "EthernetBonjour",
+      "url": "https://github.com/TrippyLighting/EthernetBonjour"
+    }
   ]
 }
