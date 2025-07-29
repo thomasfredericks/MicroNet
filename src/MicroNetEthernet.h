@@ -1,6 +1,7 @@
 #ifndef __MICRO_NET_ETHERNET__
 #define __MICRO_NET_ETHERNET__
 
+/*
 
 #include <SPI.h>
 #include <Ethernet.h>
@@ -87,7 +88,7 @@ public:
 
 
 };
-
+*/
 
 
 #endif
