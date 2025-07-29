@@ -1,9 +1,10 @@
-#ifndef __NETWORK_MANAGER_WIFI__
-#define __NETWORK_MANAGER_WIFI__
+#ifndef __MICRO_NET_WIFI__
+#define __MICRO_NET_WIFI__
 
 #include <MicroNet.h>
 #include <WiFi.h>
 #include <ESPmDNS.h>
+#include "esp_mac.h"  
 // https://github.com/tzapu/WiFiManager
 #include <WiFiManager.h>
 
