@@ -2,6 +2,7 @@
 #define __MICRO_NET_ETHERNET__
 
 /*
+// ETHERNET IS CURRENTLY BROKEN...
 
 #include <SPI.h>
 #include <Ethernet.h>
