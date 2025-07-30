@@ -19,7 +19,7 @@ protected:
   }
 
 public:
-  void begin(char *name)
+  void begin(const char *name)
   {
 
     strcpy(_name, name);
