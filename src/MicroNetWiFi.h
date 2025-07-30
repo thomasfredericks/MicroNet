@@ -4,7 +4,7 @@
 #include <MicroNet.h>
 #include <WiFi.h>
 #include <ESPmDNS.h>
-#include "esp_mac.h"  
+#include "esp_mac.h"  // For MAC address querying on ESP32
 // https://github.com/tzapu/WiFiManager
 #include <WiFiManager.h>
 
@@ -27,12 +27,12 @@ protected:
   virtual void connect() {
 
 
-    LOG("NetworkManager", "Starting WiFi Manager with name", _name);
+    //LOG("NetworkManager", "Starting WiFi Manager with name", _name);
     WiFi.mode(WIFI_STA);  // explicitly set mode, esp defaults to STA+AP
 
     //reset settings - wipe credentials for testing
     //wm.resetSettings();
-    LOG("NetworkManager", "Trying to connect WiFi");
+    //LOG("NetworkManager", "Trying to connect WiFi");
     wifiManager.setEnableConfigPortal(true);
     wifiManager.setConfigPortalBlocking(false);
     wifiManager.setCaptivePortalEnable(true);
@@ -40,8 +40,8 @@ protected:
 
     while ( isConnected == false ) isConnected = wifiManager.process();
 
-    LOG("NetworkManager", "Connected to network" );
-    LOG("NetworkManager", "Starting MDNS", _name, "with IP", WiFi.localIP() );
+    //LOG("NetworkManager", "Connected to network" );
+    //LOG("NetworkManager", "Starting MDNS", _name, "with IP", WiFi.localIP() );
     MDNS.begin((const char*)_name);
 
   }

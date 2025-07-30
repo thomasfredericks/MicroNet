@@ -4,9 +4,6 @@
 
 #define MICRO_NET_MDNS_NAME_MAX_LENGTH 64
 
-#ifndef __MICRO_LOG__
-#define LOG(...)
-#endif
 
 class MicroNetBase
 {
