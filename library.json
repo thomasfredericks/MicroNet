@@ -19,7 +19,7 @@
   "dependencies": [
     {
       "name": "WiFiManager",
-      "url": "https://github.com/tzapu/WiFiManager#v2.0.17"
+      "version": "https://github.com/tzapu/WiFiManager#v2.0.17"
     }
   ]
 }
