@@ -4,6 +4,7 @@
 
 #define MICRO_NET_MDNS_NAME_MAX_LENGTH 64
 
+#include <Arduino.h>
 
 class MicroNetBase
 {

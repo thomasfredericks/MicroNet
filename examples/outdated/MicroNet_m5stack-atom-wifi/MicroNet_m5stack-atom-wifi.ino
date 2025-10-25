@@ -5,12 +5,14 @@
 // MicroLog (https://github.com/thomasfredericks/MicroLog) is used for logging
 #include <MicroLog.h>
 
-#define MY_PORT 7000
-#define REMOTE_PORT 8000
-#define REMOTE_NAME "MSI"
+#define MY_NAME "ESP32"
+#define MY_OSC_UDP_PORT 7000
+
+#define COMPUTER_NAME "MSI"
+#define COMPUTER_OSC_UDP_PORT 8000
 
 
-#include <NetworkManagerWiFi.h>
+#include <MicroNet.h>
 
 WiFiUDP myUdp;
 
