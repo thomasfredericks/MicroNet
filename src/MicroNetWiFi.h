@@ -4,20 +4,20 @@
 #include <MicroNet.h>
 #include <WiFi.h>
 #include <ESPmDNS.h>
-#include "esp_mac.h"  // For MAC address querying on ESP32
+//#include "esp_mac.h"  // For MAC address querying on ESP32
 // https://github.com/tzapu/WiFiManager
 #include <WiFiManager.h>
 
 #ifdef ESP32
 class MicroNetWiFi : public MicroNetBase {
-  WiFiManager wifiManager;
+  WiFiManager wifiManager_;
 
 public:
   MicroNetWiFi() {
 #ifdef LOG_ACTIVATED
-    wifiManager.setDebugOutput(true);
+    wifiManager_.setDebugOutput(true);
 #else
-    wifiManager.setDebugOutput(false);
+    wifiManager_.setDebugOutput(false);
 #endif
   }
 
@@ -27,28 +27,26 @@ protected:
   virtual void connect() {
 
 
-    //LOG("NetworkManager", "Starting WiFi Manager with name", _name);
+    //LOG("NetworkManager", "Starting WiFi Manager with name", name_);
     WiFi.mode(WIFI_STA);  // explicitly set mode, esp defaults to STA+AP
 
     //reset settings - wipe credentials for testing
     //wm.resetSettings();
     //LOG("NetworkManager", "Trying to connect WiFi");
-    wifiManager.setEnableConfigPortal(true);
-    wifiManager.setConfigPortalBlocking(false);
-    wifiManager.setCaptivePortalEnable(true);
-    bool isConnected = wifiManager.autoConnect(_name);
+    wifiManager_.setEnableConfigPortal(true);
+    wifiManager_.setConfigPortalBlocking(false);
+    wifiManager_.setCaptivePortalEnable(true);
+    bool isConnected = wifiManager_.autoConnect(name_);
 
-    while ( isConnected == false ) isConnected = wifiManager.process();
+    while ( isConnected == false ) isConnected = wifiManager_.process();
 
-    //LOG("NetworkManager", "Connected to network" );
-    //LOG("NetworkManager", "Starting MDNS", _name, "with IP", WiFi.localIP() );
-    MDNS.begin((const char*)_name);
+    MDNS.begin((const char*)name_);
 
   }
 public:
 
   virtual IPAddress  resolveName(const char* hostName) {
-    return MDNS.queryHost(hostName);
+    return MDNS.queryHost(hostName, 1000);
   }
 
    virtual IPAddress getIP() {
@@ -56,7 +54,7 @@ public:
    }
 
   virtual void update() {
-    wifiManager.process();
+    wifiManager_.process();
   }
 
   virtual void announceUDPService(const char *name, uint16_t port)  {
@@ -65,6 +63,10 @@ public:
 
   virtual void announceTCPService(const char *name, uint16_t port)  {
     MDNS.addService(name, "tcp", port);
+  }
+
+  void resetWiFiCredentials() {
+    wifiManager_.resetSettings();
   }
 
 };

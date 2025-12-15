@@ -1,6 +1,6 @@
 {
   "name": "MicroNet",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Thomas O Fredericks",
   "maintainer": "Thomas O Fredericks",
   "description": "A network connection manager library for Arduino and PlatformIO. Helps manage the network (Ethernet or WiFi) connection and MDNS resolving.",
@@ -20,6 +20,14 @@
     {
       "name": "WiFiManager",
       "version": "https://github.com/tzapu/WiFiManager#v2.0.17"
+    }, 
+       {
+      "name": "EterhnetBonjour",
+      "version": "https://github.com/TrippyLighting/EthernetBonjour"
+    },
+    {
+      "name": "Ethernet",
+      "version": "https://github.com/arduino-libraries/Ethernet"
     }
   ]
 }
