@@ -128,7 +128,7 @@ Example producing a name like `atom-932AE4`:
 
 Copies the device MAC address into the provided buffer :
 ```cpp
-microNet.copyMac(mac);s
+microNet.copyMac(mac);
 ```
 - `mac` — A 6‑byte array (`uint8_t mac[6]`) that will receive the MAC address.
 
