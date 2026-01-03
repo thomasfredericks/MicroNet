@@ -138,7 +138,7 @@ Copies the device MAC address into the provided buffer:
 ```cpp
 myMicroNet.copyMac(mac);
 ```
-- `mac` — A 6‑byte array (`uint8_t mac[6]`) that will receive the MAC address.
+- `mac` — A 6‑byte array (`uint8_t[6]`) that will receive the MAC address.
 
 ### Get the IP address
 
