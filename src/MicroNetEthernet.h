@@ -26,10 +26,44 @@ void _MicroNetEthernetCallback(const char *name, const byte ipAddr[4])
 // ---------------------------------------------------
 class MicroNetEthernet : public MicroNetBase
 {
+public:
+  enum class Configuration
+  {
+    UNDEFINED,
+    ATOM_POE_WITH_ATOM_LITE
+  };
+
+private:
+  Configuration configuration_;
+
+public:
+  MicroNetEthernet() : configuration_(Configuration::UNDEFINED)
+  {
+  }
+
+  MicroNetEthernet(Configuration configuration)
+  {
+    configuration_ = configuration;
+  }
 
 protected:
-  virtual void connect()
+  void customReadMac(uint8_t mac_[6]) override
   {
+    esp_efuse_mac_get_default(mac_);
+    // First byte changed to 0x02 to indicate a link-local address */
+    mac_[0] = 0x02;
+  }
+
+  void customBegin() override
+  {
+
+    switch (configuration_)
+    {
+    case Configuration::ATOM_POE_WITH_ATOM_LITE:
+      SPI.begin(22, 23, 33, 19); // ATOM LITE POE
+      Ethernet.init(19);         // ATOM LITE POE
+      break;
+    }
 
     // START ETHERNET LOOKING FOR DHCP
     Ethernet.begin(mac_);
@@ -52,11 +86,10 @@ public:
     return Ethernet.localIP();
   }
 
-    virtual void update()
+  virtual void update()
   {
     EthernetBonjour.run();
   }
-
 
   virtual IPAddress resolveName(const char *hostName)
   {
@@ -71,7 +104,7 @@ public:
       while (_MicroNetEthernetReturned == false)
       {
         update();
-        //yield();
+        // yield();
       }
 
       _MicroNetEthernetReturned = false;
@@ -87,7 +120,6 @@ public:
 
     return _MicroNetEthernetIp;
   }
-
 
   virtual void announceUDPService(const char *serviceName, uint16_t servicePort)
   {

@@ -20,16 +20,17 @@ class MicroNetBase
 private:
 protected:
   char name_[MICRO_NET_NAME_MAX_LENGTH];
-  uint8_t mac_[6];
-  virtual void connect() = 0;
-  bool gotMac_ = false;
- //bool _logOutputSet = false;
- // Stream * logOutput_ = nullptr;
 
-  virtual void readMac()
+  uint8_t mac_[6];
+  bool got_mac_ = false;
+  virtual void customReadMac(uint8_t mac_[6]) = 0;
+
+  virtual void customBegin() = 0;
+  
+  void readMac()
   {
-    esp_efuse_mac_get_default(mac_);
-    gotMac_ = true;
+    customReadMac(mac_);
+    got_mac_ = true;
   }
 
   void shortDelay()
@@ -42,10 +43,9 @@ public:
   {
 
     strcpy(name_, name);
-    esp_efuse_mac_get_default(mac_);
+    readMac();
+    customBegin();
 
-    // LOG("MicroNet", "mDNS Name:", name_);
-    connect();
   }
    
   // Appends the last `numBytes` of a MAC address as hex to a C-string buffer
@@ -54,7 +54,7 @@ public:
       size_t destMaxSize,
       uint8_t numBytes)
   {
-    if (!gotMac_)
+    if (!got_mac_)
     {
       readMac();
     }
@@ -80,7 +80,7 @@ public:
 
   void copyMac(uint8_t mac[6])
   {
-    if (!gotMac_)
+    if (!got_mac_)
     {
       readMac();
     }
@@ -101,5 +101,10 @@ public:
   virtual void announceUDPService(const char *name, uint16_t port) = 0;
   virtual void announceTCPService(const char *name, uint16_t port) = 0;
 };
+
+#if !defined(__MICRO_NET_ETHERNET__) && !defined(__MICRO_NET_ETHERNET__)
+#include "MicroNetEthernet.h"
+#include "MicroNetWiFi.h"
+#endif
 
 #endif

@@ -23,8 +23,11 @@ public:
 
 
 protected:
+  void customReadMac(uint8_t mac_[6]) override {
+    esp_efuse_mac_get_default(mac_);
+  }
 
-  virtual void connect() {
+  void customBegin() override {
 
 
     //LOG("NetworkManager", "Starting WiFi Manager with name", name_);
