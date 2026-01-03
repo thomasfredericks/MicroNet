@@ -18,7 +18,7 @@ It provides:
 - Wiznet Ethernet controller chips  
     - Tested with the [M5Stack Atom POE](https://docs.m5stack.com/en/atom/atom_poe)
 
-## Examples
+## Tiny Examples
 
 ### Wi-Fi
 
@@ -43,6 +43,7 @@ MicroNetEthernet microNet;
 void setup(){
     SPI.begin(22, 23, 33, 19); // ATOM LITE POE
     Ethernet.init(19);  // ATOM LITE POE
+    // DO NOT CALL Ethernet.begin(), call the following instead:
     microNet.begin("myName");
 }
 void loop() {
@@ -54,13 +55,13 @@ void loop() {
 
 ### Global declarations
 
-For **Ethernet** :
+For **Ethernet**:
 ```cpp
 #include <MicroNetEthernet.h>
 MicroNetEthernet microNet;
 ```
 
-For **Wi-Fi** :
+For **Wi-Fi**:
 ```cpp
 #include <MicroNetWiFi.h>
 MicroNetWiFi microNet;
@@ -69,7 +70,7 @@ MicroNetWiFi microNet;
 ### Setup code
 
 
-If you are using **Ethernet**, configure the hardware **before** starting MicroNet (do **not** call `Ethernet.begin()`).
+If you are using **Ethernet**, configure the hardware **before** starting MicroNet (do **NOT** call `Ethernet.begin()`).
 
 Example configuration for an **Atom Lite POE**:
 
@@ -78,7 +79,10 @@ SPI.begin(22, 23, 33, 19); // ATOM LITE POE
 Ethernet.init(19);        // ATOM LITE POE
 ```
 
-Start MicroNet with `microNet.begin()` - the method **only** returns once it gets an IP from the DHCP server :
+> [!WARNING]
+> Do **NOT** call `Ethernet.begin()`. The following `microNet.begin(name)` should be called instead!
+
+Start MicroNet with `microNet.begin()` - the method will **only** return once it gets an IP from the DHCP server:
 ```cpp
 microNet.begin(name);
 ```
@@ -105,7 +109,7 @@ The `microNet.update()` method performs periodic network maintenance tasks and m
 
 ### Maximum name length
 
-The maximum length of the device name (including the null terminator), that you should respect, is defined by :
+The maximum length of the device name (including the null terminator), that you should respect, is defined by:
 ```cpp
 MICRO_NET_NAME_MAX_LENGTH
 ```
@@ -130,7 +134,7 @@ Example producing a name like `atom-932AE4`:
 
 ### Getting the MAC address
 
-Copies the device MAC address into the provided buffer :
+Copies the device MAC address into the provided buffer:
 ```cpp
 microNet.copyMac(mac);
 ```
@@ -138,7 +142,7 @@ microNet.copyMac(mac);
 
 ### Get the IP address
 
-Returns the current IP address of the device :
+Returns the current IP address of the device:
 ```cpp
 IPAddress ip = microNet.getIP();
 ```
@@ -155,14 +159,14 @@ IPAddress ip = microNet.resolveName(hostName);
 
 ### Announce TCP or UDP service
 
-Announce TCP service :
+Announce TCP service:
 ```cpp
 microNet.announceTCPService(serviceName, servicePort);
 ```
 - `serviceName` — C string (`const char*`) with the service name.
 - `servicePort` — TCP port number (`uint16_t`).
 
-Announce UDP service :
+Announce UDP service:
 ```cpp
 microNet.announceUDPService(serviceName, servicePort);
 ```
