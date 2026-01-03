@@ -36,6 +36,7 @@ void loop() {
 
 ### Ethernet
 
+#### Generic Ethernet
 ```cpp
 #include <Arduino.h>
 #include <MicroNetEthernet.h>
@@ -51,14 +52,33 @@ void loop() {
 }
 ```
 
+#### Preset Ethernet configuration (ATOM POE with an ATOM LITE)
+```cpp
+#include <Arduino.h>
+#include <MicroNetEthernet.h>
+MicroNetEthernet myMicroNet(MicroNetEthernet::Configuration::ATOM_POE_WITH_ATOM_LITE);
+void setup(){
+    myMicroNet.begin("myName");
+}
+void loop() {
+   myMicroNet.update()
+}
+```
+
 ## Integration
 
 ### Global declarations
 
-For **Ethernet**:
+For **Generic Ethernet**:
 ```cpp
 #include <MicroNetEthernet.h>
 MicroNetEthernet myMicroNet;
+```
+
+For **Preset Ethernet Configuration**:
+```cpp
+#include <MicroNetEthernet.h>
+MicroNetEthernet myMicroNet(MicroNetEthernet::Configuration::ATOM_POE_WITH_ATOM_LITE);
 ```
 
 For **Wi-Fi**:
@@ -69,8 +89,9 @@ MicroNetWiFi myMicroNet;
 
 ### Setup code
 
+#### Generic Ethernet
 
-If you are using **Ethernet**, configure the hardware **before** starting MicroNet (do **NOT** call `Ethernet.begin()`).
+If you are using **Generic Ethernet**, configure the hardware **before** starting MicroNet (do **NOT** call `Ethernet.begin()`).
 
 Example configuration for an **Atom Lite POE**:
 
@@ -82,13 +103,19 @@ Ethernet.init(19);        // ATOM LITE POE
 > [!WARNING]
 > Do **NOT** call `Ethernet.begin()`. The following `myMicroNet.begin(name)` should be called instead!
 
+#### Preset Ethernet Configuration
+
+If you are using a **Preset Ethernet Configuration** there is nothing to configure, the hardware will automatically be called when calling `begin()` (see below). 
+
+#### Begin
+
 Start MicroNet with `myMicroNet.begin()` - the method will **only** return once it gets an IP from the DHCP server:
 ```cpp
 myMicroNet.begin(name);
 ```
 * `name` — C string (`const char*`) used as the device and mDNS name.
 
-#### What happens when begin is called
+##### What happens when begin is called
 
 - For **Wi‑Fi**:
     - MicroNet attempts to connect to the configured access point.
