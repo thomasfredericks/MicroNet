@@ -8,11 +8,15 @@ It provides:
 - **mDNS (Bonjour)** support.
 - A **captive Wi-Fi configuration portal**.
 
-## Supported hardware
+## Tested hardware
+
+### Microcontrollers
 
 - ESP32
+
+### Ethernet boards
 - Wiznet Ethernet controller chips  
-  Tested with the [M5Stack Atom POE](https://docs.m5stack.com/en/atom/atom_poe)
+    - Tested with the [M5Stack Atom POE](https://docs.m5stack.com/en/atom/atom_poe)
 
 ## Examples
 
