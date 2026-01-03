@@ -25,12 +25,12 @@ It provides:
 ```cpp
 #include <Arduino.h>
 #include <MicroNetWifi.h>
-MicroNetWifi microNet;
+MicroNetWifi myMicroNet;
 void setup(){
-    microNet.begin("myName");
+    myMicroNet.begin("myName");
 }
 void loop() {
-   microNet.update()
+   myMicroNet.update()
 }
 ```
 
@@ -39,15 +39,15 @@ void loop() {
 ```cpp
 #include <Arduino.h>
 #include <MicroNetEthernet.h>
-MicroNetEthernet microNet;
+MicroNetEthernet myMicroNet;
 void setup(){
     SPI.begin(22, 23, 33, 19); // ATOM LITE POE
     Ethernet.init(19);  // ATOM LITE POE
     // DO NOT CALL Ethernet.begin(), call the following instead:
-    microNet.begin("myName");
+    myMicroNet.begin("myName");
 }
 void loop() {
-   microNet.update()
+   myMicroNet.update()
 }
 ```
 
@@ -58,13 +58,13 @@ void loop() {
 For **Ethernet**:
 ```cpp
 #include <MicroNetEthernet.h>
-MicroNetEthernet microNet;
+MicroNetEthernet myMicroNet;
 ```
 
 For **Wi-Fi**:
 ```cpp
 #include <MicroNetWiFi.h>
-MicroNetWiFi microNet;
+MicroNetWiFi myMicroNet;
 ```
 
 ### Setup code
@@ -80,11 +80,11 @@ Ethernet.init(19);        // ATOM LITE POE
 ```
 
 > [!WARNING]
-> Do **NOT** call `Ethernet.begin()`. The following `microNet.begin(name)` should be called instead!
+> Do **NOT** call `Ethernet.begin()`. The following `myMicroNet.begin(name)` should be called instead!
 
-Start MicroNet with `microNet.begin()` - the method will **only** return once it gets an IP from the DHCP server:
+Start MicroNet with `myMicroNet.begin()` - the method will **only** return once it gets an IP from the DHCP server:
 ```cpp
-microNet.begin(name);
+myMicroNet.begin(name);
 ```
 * `name` — C string (`const char*`) used as the device and mDNS name.
 
@@ -100,9 +100,9 @@ microNet.begin(name);
 
 ### Loop integration
 
-The `microNet.update()` method performs periodic network maintenance tasks and must be called as often as possible:
+The `myMicroNet.update()` method performs periodic network maintenance tasks and must be called as often as possible:
 ```cpp
-    microNet.update();
+    myMicroNet.update();
 ```
 
 ## Additional configuration
@@ -118,7 +118,7 @@ MICRO_NET_NAME_MAX_LENGTH
 
 You can append part of the MAC address to an existing C string to generate a unique name:
 ```cpp
-microNet.appendMacToCString(prefix, destMaxSize, numBytes)
+myMicroNet.appendMacToCString(prefix, destMaxSize, numBytes)
 ```
 - `prefix` — Destination C string (`char*`) containing the name prefix.
 - `destMaxSize` — Maximum size of the destination buffer (`size_t`).
@@ -127,16 +127,16 @@ microNet.appendMacToCString(prefix, destMaxSize, numBytes)
 Example producing a name like `atom-932AE4`:
 ```cpp
   char myName[MICRO_NET_NAME_MAX_LENGTH] = "atom-"; // name prefix
-  microNet.appendMacToCString(myName, MICRO_NET_NAME_MAX_LENGTH, 3);
+  myMicroNet.appendMacToCString(myName, MICRO_NET_NAME_MAX_LENGTH, 3);
   // START MicroNet with the custom name
-  microNet.begin(myName);
+  myMicroNet.begin(myName);
 ```
 
 ### Getting the MAC address
 
 Copies the device MAC address into the provided buffer:
 ```cpp
-microNet.copyMac(mac);
+myMicroNet.copyMac(mac);
 ```
 - `mac` — A 6‑byte array (`uint8_t mac[6]`) that will receive the MAC address.
 
@@ -144,7 +144,7 @@ microNet.copyMac(mac);
 
 Returns the current IP address of the device:
 ```cpp
-IPAddress ip = microNet.getIP();
+IPAddress ip = myMicroNet.getIP();
 ```
 
 ## Additional mDNS (Bonjour) code
@@ -153,7 +153,7 @@ IPAddress ip = microNet.getIP();
 
 The `resolveName()` method will resolve an mDNS host name to its IP. The method **only** returns if the host is found!
 ```cpp
-IPAddress ip = microNet.resolveName(hostName);
+IPAddress ip = myMicroNet.resolveName(hostName);
 ```
 - `hostName` — C string (`const char*`) containing the mDNS hostname.
 
@@ -161,14 +161,14 @@ IPAddress ip = microNet.resolveName(hostName);
 
 Announce TCP service:
 ```cpp
-microNet.announceTCPService(serviceName, servicePort);
+myMicroNet.announceTCPService(serviceName, servicePort);
 ```
 - `serviceName` — C string (`const char*`) with the service name.
 - `servicePort` — TCP port number (`uint16_t`).
 
 Announce UDP service:
 ```cpp
-microNet.announceUDPService(serviceName, servicePort);
+myMicroNet.announceUDPService(serviceName, servicePort);
 ```
 - `serviceName` — C string (`const char*`) with the service name.
 - `servicePort` — TCP port number (`uint16_t`).
