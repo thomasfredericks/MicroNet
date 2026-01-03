@@ -30,7 +30,8 @@ public:
   enum class Configuration
   {
     UNDEFINED,
-    ATOM_POE_WITH_ATOM_LITE
+    ATOM_POE_WITH_ATOM_LITE,
+    ATOM_POE_WITH_ATOMS3
   };
 
 private:
@@ -62,6 +63,10 @@ protected:
     case Configuration::ATOM_POE_WITH_ATOM_LITE:
       SPI.begin(22, 23, 33, 19); // ATOM LITE POE
       Ethernet.init(19);         // ATOM LITE POE
+      break;
+    case Configuration::ATOM_POE_WITH_ATOMS3:
+      SPI.begin(5, 7, 8, 6); // ATOM S3 POE
+      Ethernet.init(6);      // ATOM S3 POE
       break;
     }
 

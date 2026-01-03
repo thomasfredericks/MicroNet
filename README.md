@@ -178,7 +178,7 @@ IPAddress ip = myMicroNet.getIP();
 
 ###  Resolving an mDNS hostname
 
-The `resolveName()` method will resolve an mDNS host name to its IP. The method **only** returns if the host is found!
+The `resolveName()` method will resolve an mDNS host name to its IP. The method **only** returns if the host is found! **Do not** append `.local` to the `hostName`.
 ```cpp
 IPAddress ip = myMicroNet.resolveName(hostName);
 ```
