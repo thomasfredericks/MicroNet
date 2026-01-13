@@ -8,13 +8,13 @@ It provides:
 - **mDNS (Bonjour)** support.
 - A **captive Wi-Fi configuration portal**.
 
-## Tested hardware
+## Tested Hardware
 
 ### Microcontrollers
 
 - ESP32
 
-### Ethernet boards
+### Ethernet Boards
 - Wiznet Ethernet controller chips  
     - Tested with the [M5Stack Atom POE](https://docs.m5stack.com/en/atom/atom_poe)
 
@@ -33,10 +33,8 @@ void loop() {
    myMicroNet.update()
 }
 ```
+### Generic Ethernet
 
-### Ethernet
-
-#### Generic Ethernet
 ```cpp
 #include <Arduino.h>
 #include <MicroNetEthernet.h>
@@ -52,7 +50,8 @@ void loop() {
 }
 ```
 
-#### Preset Ethernet configuration (ATOM POE with an ATOM LITE)
+### Preset Ethernet Configuration
+
 ```cpp
 #include <Arduino.h>
 #include <MicroNetEthernet.h>
@@ -65,21 +64,35 @@ void loop() {
 }
 ```
 
+
 ## Integration
 
-### Global declarations
+### Global Declarations
 
-For **Generic Ethernet**:
+#### Generic Ethernet
+
 ```cpp
 #include <MicroNetEthernet.h>
 MicroNetEthernet myMicroNet;
 ```
 
-For **Preset Ethernet Configuration**:
+
+
+
+#### Preset Ethernet Configurations
+
 ```cpp
 #include <MicroNetEthernet.h>
 MicroNetEthernet myMicroNet(MicroNetEthernet::Configuration::ATOM_POE_WITH_ATOM_LITE);
 ```
+Available presets:
+```cpp
+MicroNetEthernet::Configuration::ATOM_POE_WITH_ATOM_LITE // Atom POE with Atom Lite
+MicroNetEthernet::Configuration::ATOM_POE_WITH_ATOMS3 // Atom POE with Atom S3 
+```
+
+
+#### Wi-Fi
 
 For **Wi-Fi**:
 ```cpp
