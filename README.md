@@ -30,7 +30,7 @@ void setup(){
     myMicroNet.begin("myName");
 }
 void loop() {
-   myMicroNet.update()
+   myMicroNet.update();
 }
 ```
 ### Generic Ethernet
@@ -46,7 +46,7 @@ void setup(){
     myMicroNet.begin("myName");
 }
 void loop() {
-   myMicroNet.update()
+   myMicroNet.update();
 }
 ```
 
